@@ -1,6 +1,6 @@
 import React from 'react'
 import '../App.css'
-export default class App extends React.Component{
+export default class Case extends React.Component{
    constructor(props){
     super(props)
      this.state={
@@ -9,7 +9,7 @@ export default class App extends React.Component{
    }
     render(){    
         return(
-            <div class="case">
+            <div class="case" id={this.props.id}>
                     {this.props.valeur}
             </div>
                
