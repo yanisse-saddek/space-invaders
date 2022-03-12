@@ -9,8 +9,8 @@ export default class Case extends React.Component{
    }
     render(){    
         return(
-            <div class="case" id={this.props.id}>
-                    {this.props.valeur}
+            <div class="case" style={{background:this.props.valeur}} id={this.props.id}>
+
             </div>
                
     )

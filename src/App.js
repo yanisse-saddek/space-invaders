@@ -7,11 +7,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tireurCases: ["tireur", "", "", "", " ", "", "", "", "", ""],
+      tireurCases: ["green", "", "", "", " ", "", "", "", "", ""],
       position: 0,
       grid: [
-        ["ok", "ok", "ok", "ok", "", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", "ok"],
+        ["red", "red", "red", "red", "", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " ", "red"],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -24,7 +24,8 @@ export default class App extends React.Component {
       x: 0,
       y: 0,
       position: 0,
-      active:true
+      active:true,
+      score:0
     }
   }
   componentDidMount = () => {
@@ -40,27 +41,27 @@ export default class App extends React.Component {
       if(this.state.active){
         this.deplacement()
         this.newMonster()  
+        console.log('score', this.state.score)
       }
     }, 1000)
   }
   newMonster=()=>{
-    console.log('beignet')
     var gridMonster = this.state.grid
     var randY = Math.ceil(Math.random()*5)
     var randX = Math.ceil(Math.random()*9)
-    gridMonster[randY][randX] = "pp"
+    gridMonster[randY][randX] = "red"
     this.setState({
       grid:gridMonster
     })
   }
   deplacement = () => {
     for (var y = 0; y < 10; y++) {
-      for (var x = 0; x < 9; x++) {
-        if (this.state.grid[y][x] == "1") {
+      for (var x = 0; x < 10; x++) {
+        if (this.state.grid[y][x] == "blue") {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[y][x] = " "
           if(y>1){
-            deplacementGrid[y-1][x] = "1"
+            deplacementGrid[y-1][x] = "blue"
           }
           this.setState({
             grid: deplacementGrid,
@@ -70,9 +71,10 @@ export default class App extends React.Component {
       }
     }
 
-    if(this.state.y>8){
-      for(var checkX=0; checkX<10; checkX++){
-        if(this.state.grid[this.state.y][checkX] == "ok"){
+    if(this.state.y>8 && this.state.active){
+      for(var checkX=0; checkX<=9; checkX++){
+        console.log("------", this.state.grid[9][checkX])
+        if(this.state.grid[9][checkX] == "red"){
           console.log('game over cousin ta perdu')
           this.setState({
             active:false
@@ -84,23 +86,24 @@ export default class App extends React.Component {
         }
       }
     }else{
-      for (var x = 0; x <= 10; x++) {
-        if (this.state.grid[this.state.y][x] == "ok" && this.state.grid[this.state.y + 1][x] !== "1") {
+      for (var x = 10; x >=0; x--) {
+        if (this.state.grid[this.state.y][x] == "red" && this.state.grid[this.state.y + 1][x] !== "blue") {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[this.state.y][x] = " "
-            deplacementGrid[this.state.y + 1][x] = "ok"
+            deplacementGrid[this.state.y + 1][x] = "red"
           this.setState({
             grid: deplacementGrid,
             x: this.state.x + 1,
           })
         }
-        else if (this.state.grid[this.state.y + 1][x] == "1") {
+        else if (this.state.grid[this.state.y + 1][x] == "blue") {
           deplacementGrid[this.state.y][x] = " "
           deplacementGrid[this.state.y+1][x] = " "
           console.log('collission')
           this.setState({
             grid: deplacementGrid,
             x: this.state.x + 1,
+            score:this.state.score+1
           })
         }
       }
@@ -123,7 +126,7 @@ export default class App extends React.Component {
       var newPosition = this.state.position + 1
       var shooterCase = this.state.tireurCases
       shooterCase[newPosition - 1] = " "
-      shooterCase[newPosition] = "tireur"
+      shooterCase[newPosition] = "green"
       this.setState({
         position: newPosition,
         tireurCases: shooterCase
@@ -136,7 +139,7 @@ export default class App extends React.Component {
       var newPosition = this.state.position - 1
       var shooterCase = this.state.tireurCases
       shooterCase[newPosition + 1] = " "
-      shooterCase[newPosition] = "tireur"
+      shooterCase[newPosition] = "green"
       this.setState({
         position: newPosition,
         tireurCases: shooterCase
@@ -146,7 +149,7 @@ export default class App extends React.Component {
   shoot = () => {
     var position = this.state.position
     var newGrid = this.state.grid
-    newGrid[9][position] = "1"
+    newGrid[9][position] = "blue"
     // this.setState({
     //   grid:newGrid
     // })
@@ -180,9 +183,7 @@ export default class App extends React.Component {
               return <Case valeur={cases} />
             })
           }
-          <button onClick={() => {
-            this.newBullet()
-          }}>aaa</button>
+          <p>Score: {this.state.score}</p>
         </div>
       </div>
     )
