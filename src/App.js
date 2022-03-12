@@ -18,6 +18,7 @@ export default class App extends React.Component {
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", "1", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],          // <--- pour le vaisseau 
       ],
@@ -42,6 +43,7 @@ export default class App extends React.Component {
         this.deplacement()
         this.newMonster()  
         console.log('score', this.state.score)
+        console.log(this.state.score*1000)
       }
     }, 1000)
   }
@@ -55,9 +57,10 @@ export default class App extends React.Component {
     })
   }
   deplacement = () => {
-    for (var y = 0; y < 10; y++) {
-      for (var x = 0; x < 10; x++) {
+    for (var y = 0; y < this.state.grid.length; y++) {
+      for (var x = 0; x < this.state.grid.length; x++) {
         if (this.state.grid[y][x] == "blue") {
+          console.log("longueur", this.state.grid.length)
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[y][x] = " "
           if(y>1){
@@ -71,10 +74,10 @@ export default class App extends React.Component {
       }
     }
 
-    if(this.state.y>8 && this.state.active){
-      for(var checkX=0; checkX<=9; checkX++){
-        console.log("------", this.state.grid[9][checkX])
-        if(this.state.grid[9][checkX] == "red"){
+    if(this.state.y>this.state.grid.length-2 && this.state.active){
+      for(var checkX=0; checkX<=this.state.grid.length-1; checkX++){
+        var lastGrid = this.state.grid.slice(-1)
+        if(lastGrid[checkX].includes("red")){
           console.log('game over cousin ta perdu')
           this.setState({
             active:false
@@ -86,7 +89,7 @@ export default class App extends React.Component {
         }
       }
     }else{
-      for (var x = 10; x >=0; x--) {
+      for (var x = this.state.grid.length; x >=0; x--) {
         if (this.state.grid[this.state.y][x] == "red" && this.state.grid[this.state.y + 1][x] !== "blue") {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[this.state.y][x] = " "
@@ -97,14 +100,9 @@ export default class App extends React.Component {
           })
         }
         else if (this.state.grid[this.state.y + 1][x] == "blue") {
-          deplacementGrid[this.state.y][x] = " "
+          deplacementGrid[this.state.y][x] = "orange"
           deplacementGrid[this.state.y+1][x] = " "
-          console.log('collission')
-          this.setState({
-            grid: deplacementGrid,
-            x: this.state.x + 1,
-            score:this.state.score+1
-          })
+          this.collision(this.state.y, x)
         }
       }
       this.setState({
@@ -112,15 +110,19 @@ export default class App extends React.Component {
       })
     }
   }
-  newBullet = () => {
-    var random = Math.ceil(Math.random() * 8)
-    var newGrid = this.state.grid
-    newGrid[8][random] = "1"
-    this.setState({
-      grid: newGrid
-    })
+  collision= (y, x)=>{
+    console.log("colision", y, x)
+    setTimeout(() => {
+      var deplacementGrid = this.state.grid
+      deplacementGrid[y][x] = " "
+      console.log(deplacementGrid)
+      this.setState({
+        grid: deplacementGrid,
+        x: this.state.x + 1,
+        score:this.state.score+1
+      })
+    }, 1000);
   }
-
   goRight = () => {
     if (this.state.position !== 9) {
       var newPosition = this.state.position + 1
@@ -149,7 +151,7 @@ export default class App extends React.Component {
   shoot = () => {
     var position = this.state.position
     var newGrid = this.state.grid
-    newGrid[9][position] = "blue"
+    newGrid[10][position] = "blue"
     // this.setState({
     //   grid:newGrid
     // })
