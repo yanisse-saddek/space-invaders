@@ -4,10 +4,6 @@ export default class Tireur extends React.Component{
    constructor(props){
     super(props)
      this.state={
-        grid:this.props.data.grid,
-        toReturn:[],
-        shooterCase: [' ',' ',' ','tireur',' ',' ',' ',' ',' ',' ', ],
-        position:0
      }
    }
 

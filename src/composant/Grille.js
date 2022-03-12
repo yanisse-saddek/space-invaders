@@ -60,49 +60,7 @@ export default class Grille extends React.Component {
         }, 1000);
  
 }
-goRight = () =>{
-    // if(this.props.data.position!==9){
-    var newPosition = this.props.data.position+1
-    this.props.changePosition(newPosition)
-    setTimeout(() => {
-        this.bottomShooter()        
-    }, 100);
-// }    
-}
-    goLeft = () =>{
-        // if(this.props.data.position!==0){
-            var newPosition = this.props.data.position-1
-            this.props.changePosition(newPosition)
-            setTimeout(() => {
-                this.bottomShooter()        
-            }, 100);
-        // }
-    }
 
-    key=(key)=>{
-        if(key.code == "ArrowRight"){
-            this.goRight()
-        }else if(key.code == 'ArrowLeft'){
-            this.goLeft()
-        }else if(key.code == "Space"){
-            this.shoot()
-        }
-    }
-    bottomShooter = ()=>{
-     var bottomCase = []
-     var x=0
-     for(var i=0; i<10; i++){
-      if(this.props.data.position == x){
-          bottomCase.push(<Case valeur="tireur"/>)
-          this.props.changePosition(x)
-      }else{
-          bottomCase.push(<Case valeur=" "/>)
-      }
-      x++
-     }
-     
-     this.props.editData(bottomCase)
-    }
      render(){    
         return(
             <div onKeyDown={this.key} tabIndex="0" class="tableau ">
