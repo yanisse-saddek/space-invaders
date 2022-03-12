@@ -3,7 +3,6 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .case{
-  border:1px solid black;
-  height:30px; 
-  width:30px;
+  height:3vh;
+  width:3vh;
 }
