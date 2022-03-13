@@ -7,30 +7,25 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tireurCases: ["https://us.123rf.com/450wm/bsd555/bsd5552005/bsd555200501008/147207937-homme-marchant-vers-l-avant-semi-plat-illustration-vectorielle-de-couleur-rvb.jpg?ver=6", "", "", "", " ", "", "", "", "", ""],
+      tireurCases: ["https://us.123rf.com/450wm/bsd555/bsd5552005/bsd555200501008/147207937-homme-marchant-vers-l-avant-semi-plat-illustration-vectorielle-de-couleur-rvb.jpg?ver=6", "", "", "", " ", "", "", "", ""],
       position: 0,
       grid: [
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],          // <--- pour le vaisseau 
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
       ],
       x: 0,
       y: 0,
@@ -65,8 +60,9 @@ export default class App extends React.Component {
   }
   newMonster=()=>{
     var gridMonster = this.state.grid
-    var randY = Math.ceil(Math.random()*3)
-    var randX = Math.floor(Math.random()*10)
+    var randY = Math.ceil(Math.random() * (this.state.grid.length/3))
+    var randX = Math.floor(Math.random()*this.state.grid[randY].length)
+    console.log(this.state.grid[randY].length/2)
     gridMonster[randY][randX] = this.state.monster
     this.setState({
       grid:gridMonster
@@ -114,13 +110,9 @@ export default class App extends React.Component {
             x: this.state.x + 1,
           })
         }
-         if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster) {
-          console.log("touche!é")
+         if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster || this.state.grid[this.state.y][x] == this.state.balle) {
           deplacementGrid[this.state.y+1][x] = " "
           deplacementGrid[this.state.y][x] = this.state.explosion
-          deplacementGrid[this.state.y-1][x] = "https://yt3.ggpht.com/ytc/AKedOLRxDKG0KL704hRwVp8DwmnVyplRu3NGvjJRF0M=s88-c-k-c0x00ffffff-no-rj"
-
-          console.log([...deplacementGrid])
           this.setState({
             score:this.state.score+1
           })
@@ -145,7 +137,7 @@ export default class App extends React.Component {
     }, 1000);
   }
   goRight = () => {
-    if (this.state.position !== 9) {
+    if (this.state.position !== this.state.tireurCases.length-1) {
       var newPosition = this.state.position + 1
       var shooterCase = this.state.tireurCases
       shooterCase[newPosition - 1] = " "
