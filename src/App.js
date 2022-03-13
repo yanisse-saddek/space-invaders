@@ -26,7 +26,7 @@ export default class App extends React.Component {
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " " , " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -105,7 +105,7 @@ export default class App extends React.Component {
       }
     }else{
       for (var x = this.state.grid.length; x >=0; x--) {
-        if (this.state.grid[this.state.y][x] == this.state.monster && this.state.grid[this.state.y + 1][x] !== this.state.balle) {
+        if (this.state.grid[this.state.y][x] == this.state.monster && this.state.grid[this.state.y+1][x] !== this.state.monster  && this.state.grid[this.state.y + 1][x] !== this.state.balle) {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[this.state.y][x] = " "
             deplacementGrid[this.state.y + 1][x] = this.state.monster
@@ -113,15 +113,18 @@ export default class App extends React.Component {
             grid: deplacementGrid,
             x: this.state.x + 1,
           })
-          console.log(this.state.grid[0][0])
         }
-        else if (this.state.grid[this.state.y + 1][x] == this.state.balle) {
-          deplacementGrid[this.state.y][x] = this.state.explosion
+         if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster) {
+          console.log("touche!é")
           deplacementGrid[this.state.y+1][x] = " "
+          deplacementGrid[this.state.y][x] = this.state.explosion
+          deplacementGrid[this.state.y-1][x] = "https://yt3.ggpht.com/ytc/AKedOLRxDKG0KL704hRwVp8DwmnVyplRu3NGvjJRF0M=s88-c-k-c0x00ffffff-no-rj"
+
+          console.log([...deplacementGrid])
           this.setState({
             score:this.state.score+1
           })
-          this.collision(this.state.y, x)
+          this.collision(this.state.y, x)  
         }
       }
       this.setState({
@@ -133,12 +136,12 @@ export default class App extends React.Component {
     setTimeout(() => {
       var deplacementGrid = this.state.grid
       deplacementGrid[y][x] = " "
-      // deplacementGrid[y-1][x] = " "
-      // this.setState({
-      //   grid: deplacementGrid,
-      //   x: this.state.x + 1,
-      //   score:this.state.score+1
-      // })
+      deplacementGrid[y-1][x] = " "
+      this.setState({
+        grid: deplacementGrid,
+        x: this.state.x + 1,
+        score:this.state.score+1
+      })
     }, 1000);
   }
   goRight = () => {
