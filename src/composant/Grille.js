@@ -30,16 +30,7 @@ export default class App extends React.Component{
         this.setState({
             tablo:nouvotablo
         }) 
-        var newGrid = []
-        newGrid.push([" ", " ", " ", " ", " ", " ", " ", " ", " ", " "])
-        for(var ok=0; ok<9; ok++){
-            newGrid.push(this.state.grid[ok+1]) 
-        }
-        newGrid.push(this.state.grid[9])
-        this.setState({
-          grid:newGrid
-        })
-        this.componentDidMount()
+        
     }
 
     render(){    
