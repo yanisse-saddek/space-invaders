@@ -18,10 +18,10 @@ export default class Game extends React.Component {
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", "https://img2.freepng.fr/20181118/opy/kisspng-clip-art-openclipart-free-content-monster-image-free-rock-cartoon-cliparts-download-free-clip-art-5bf168eb018c98.5433835315425476910064.jpg"],
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " ", "https://previews.123rf.com/images/jirkaejc/jirkaejc1711/jirkaejc171100010/88858112-.jpg"],
-        [" ", " ", " ", " ", " ", " ", " ", " ", "https://previews.123rf.com/images/jirkaejc/jirkaejc1711/jirkaejc171100010/88858112-.jpg"],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " ", " ", " "],
       ],
@@ -47,7 +47,7 @@ export default class Game extends React.Component {
 
     setInterval(() => {
       if(this.state.active){
-        // this.newMonster()  
+        this.newMonster()  
       }
     }, 500)
     setInterval(() => {
@@ -87,11 +87,11 @@ export default class Game extends React.Component {
       for(var checkX=0; checkX<=this.state.grid.length-1; checkX++){
         var lastGrid = this.state.grid.slice(-1)
         if(lastGrid[checkX].includes(this.state.monster)){
+          console.log('game over cousin ta perdu')
           this.setState({
             active:false
           })
           localStorage.setItem('score', this.state.score)
-          this.props.endGame()
         }else{
           this.setState({
             y:0
@@ -128,15 +128,13 @@ export default class Game extends React.Component {
   collision= (y, x)=>{
     setTimeout(() => {
       var deplacementGrid = this.state.grid
-      console.log(deplacementGrid)
-      deplacementGrid[y][x] = this.state.balle
+      deplacementGrid[y][x] = " "
       deplacementGrid[y-1][x] = " "
       this.setState({
         grid: deplacementGrid,
         x: this.state.x + 1,
         score:this.state.score+1
       })
-      // console.log(deplacementGrid[y])
     }, 1000);
   }
   goRight = () => {
@@ -185,7 +183,7 @@ export default class Game extends React.Component {
   render() {
     return (
       <div className="App">
-        <div id='game' tabIndex={0} onKeyDown={this.key} class="tableau">
+        <div tabIndex="0" onKeyDown={this.key} class="tableau">
           {
             this.state.grid.map(y => {
               var toReturn = []
