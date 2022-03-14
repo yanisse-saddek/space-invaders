@@ -13,12 +13,17 @@ export default class App extends React.Component {
     if(this.state.actif == "menu"){
       return <Menu start={this.startGame}/>
     }else if(this.state.actif == "game"){
-      return <Game />
+      return <Game endGame={this.endGame}/>
     }
   }
   startGame = ()=>{
     this.setState({
       actif:'game'
+    })
+  }
+  endGame = ()=>{
+    this.setState({
+      actif:'menu'
     })
   }
   render() {
