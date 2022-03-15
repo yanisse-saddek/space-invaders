@@ -21,9 +21,10 @@ export default class App extends React.Component {
       actif:'game'
     })
   }
+
   render() {
     return (
-      <div className="App">
+      <div className="App menu" id="App">
           {this.game()}
       </div>
     )
