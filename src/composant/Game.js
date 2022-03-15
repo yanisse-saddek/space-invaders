@@ -63,14 +63,15 @@ export default class Game extends React.Component {
       grid: gridMonster
     })
   }
+
   deplacement = () => {
     for (var y = 0; y < this.state.grid.length; y++) {
       for (var x = 0; x < this.state.grid.length; x++) {
         if (this.state.grid[y][x] == this.state.balle) {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[y][x] = " "
-          if (y > 1) {
-            deplacementGrid[y - 1][x] = this.state.balle
+          if(y>1){
+            deplacementGrid[y-1][x] = this.state.balle
           }
           this.setState({
             grid: deplacementGrid,
@@ -80,38 +81,47 @@ export default class Game extends React.Component {
       }
     }
 
-    if (this.state.y > this.state.grid.length - 2 && this.state.active) {
-      for (var checkX = 0; checkX <= this.state.grid.length - 1; checkX++) {
+    if(this.state.y>this.state.grid.length-2 && this.state.active){
+      for(var checkX=0; checkX<=this.state.grid.length-1; checkX++){
         var lastGrid = this.state.grid.slice(-1)
-        if (lastGrid[checkX].includes(this.state.monster)) {
+        if(lastGrid[checkX].includes(this.state.monster)){
           console.log('game over cousin ta perdu')
           this.setState({
-            active: false
+            active:false
           })
           localStorage.setItem('score', this.state.score)
-        } else {
+        }else{
           this.setState({
-            y: 0
+            y:0
           })
         }
       }
-    } else {
-      for (var x = this.state.grid.length; x >= 0; x--) {
-        if (this.state.grid[this.state.y][x] == this.state.monster && this.state.grid[this.state.y + 1][x] !== this.state.monster && this.state.grid[this.state.y + 1][x] !== this.state.balle) {
+    }else{
+      for (var x = this.state.grid.length; x >=0; x--) {
+        if (this.state.grid[this.state.y][x] == this.state.monster && this.state.grid[this.state.y+1][x] !== this.state.monster  && this.state.grid[this.state.y + 1][x] !== this.state.balle) {
           var deplacementGrid = [...this.state.grid]
           deplacementGrid[this.state.y][x] = " "
-          deplacementGrid[this.state.y + 1][x] = this.state.monster
+            deplacementGrid[this.state.y + 1][x] = this.state.monster
           this.setState({
             grid: deplacementGrid,
             x: this.state.x + 1,
           })
         }
+        if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster || this.state.grid[this.state.y][x] == this.state.balle) {
+          deplacementGrid[this.state.y+1][x] = " "
+          deplacementGrid[this.state.y][x] = " "
+          let audio = new Audio('/explosion.mp3')
+          audio.play()
+          this.setState({
+            score:this.state.score+1
+          })
+        }
       }
       this.setState({
-        y: this.state.y + 1
+        y:this.state.y+1
       })
     }
-  }
+  }	
   goRight = () => {
     if (this.state.position !== this.state.tireurCases.length - 1) {
       var newPosition = this.state.position + 1
