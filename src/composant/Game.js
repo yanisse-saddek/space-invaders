@@ -64,7 +64,7 @@ export default class Game extends React.Component {
       if (this.state.active) {
         this.deplacement()
       }
-    }, 300)
+    }, 200)
   }
   newMonster = () => {
     var gridMonster = this.state.grid
