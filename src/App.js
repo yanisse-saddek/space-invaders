@@ -14,11 +14,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount = ()=>{
-      this.playSound()      
+      this.stopSound()      
   }
   Fullscreen = () =>  {
     var elem = document.getElementById("App");
-
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     }

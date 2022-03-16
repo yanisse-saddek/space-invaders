@@ -204,10 +204,16 @@ export default class Game extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="flex">
-          <p className="score">Score: {this.state.score}</p>
-          <p className="score">meilleure score : {localStorage.getItem('score')}</p>
-          {this.state.lifes}
+        <div className="infos">
+          <div>
+            <p>Score: {this.state.score}</p>            
+          </div>
+          <div>
+            <p>meilleure score : {localStorage.getItem('score')}</p>
+          </div>
+          <div>
+            {this.state.lifes}
+          </div>
         </div>
         <div tabIndex="0" onKeyDown={this.key} class="tableau">
           {

@@ -66,10 +66,18 @@
   width:35px
 }
 
-.flex{
+.infos{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  font-family: 'Press Start 2p';
+  width:1200px;
+}
+.infos div{
+  width:30%;
+}
+.icons svg{
+  width:50%;
 }
 
 .menu {
@@ -109,4 +117,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.score-txt{
+  font-family: 'Press Start 2p';
 }

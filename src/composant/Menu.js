@@ -12,7 +12,7 @@ export default class App extends React.Component{
             
             <span class='start-btn' onClick={()=>{this.props.start()}}>START</span> 
 
-            {localStorage.getItem('score')?<p>meilleure score : {localStorage.getItem('score')}</p>:null}
+            {localStorage.getItem('score')?<p class="score-txt">Meilleur Score: {localStorage.getItem('score')}</p>:null}
             </div>
     )
     }
