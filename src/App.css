@@ -1,6 +1,10 @@
 @font-face {
   font-family: "aliens";
-  src: url(../public/fonts/Future\ Blood.ttf)
+  src: url(../public/fonts/Future\ Blood.ttf);
+  font-family: 'Press Start 2p';
+  src: url(../public/fonts/PressStart2P-Regular.ttf);
+
+
 }
 
 .App{
@@ -72,8 +76,37 @@
   position: relative;
 }
 
-.menu svg {
+.start-btn{
+  font-family: 'Press Start 2p';
+    text-align: center;
+	  display: inline-block;
+	  margin:5px;
+    font-weight: bold;
+    padding: 20px 70px 20px 70px ;
+    background-color: white;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: #F80029;
+    -webkit-border-radius: 7px;
+	  -moz-border-radius: 7px;
+	  -o-border-radius: 7px;
+	  border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+
+}
+.video-game-button:active, .start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
+
+.icons{
   position: absolute;
   top: 10px;
-  left : 10px
+  left : 10px;
+  width:200px;
+  height:100Px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

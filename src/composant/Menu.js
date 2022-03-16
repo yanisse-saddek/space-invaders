@@ -4,23 +4,14 @@ export default class App extends React.Component{
     super(props)
 }
 
-Fullscreen = () =>  {
-    var elem = document.getElementById("App");
-
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    }
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    }
-}
     render(){    
         return(
-            <div>
-                
-<svg onClick={() => {this.Fullscreen()}} xmlns="http://www.w3.org/2000/svg" fill='white' height="40px" viewBox="0 0 448 512"><path d="M128 32H32C14.31 32 0 46.31 0 64v96c0 17.69 14.31 32 32 32s32-14.31 32-32V96h64c17.69 0 32-14.31 32-32S145.7 32 128 32zM416 32h-96c-17.69 0-32 14.31-32 32s14.31 32 32 32h64v64c0 17.69 14.31 32 32 32s32-14.31 32-32V64C448 46.31 433.7 32 416 32zM128 416H64v-64c0-17.69-14.31-32-32-32s-32 14.31-32 32v96c0 17.69 14.31 32 32 32h96c17.69 0 32-14.31 32-32S145.7 416 128 416zM416 320c-17.69 0-32 14.31-32 32v64h-64c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c17.69 0 32-14.31 32-32v-96C448 334.3 433.7 320 416 320z"/></svg>
+            <div>   
             <h1><img src="/img/logospace.png" height="300px"></img></h1>
-            <p className="start" onClick={()=>{this.props.start()}}>commencer</p> 
+
+            
+            <span class='start-btn' onClick={()=>{this.props.start()}}>START</span> 
+
             {localStorage.getItem('score')?<p>meilleure score : {localStorage.getItem('score')}</p>:null}
             </div>
     )
