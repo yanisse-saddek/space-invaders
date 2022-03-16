@@ -28,7 +28,7 @@ export default class Game extends React.Component {
       active: true,
       score: 0,
       // explosion: "yanisse/img/monsters-dead.png",
-      monster: "/img/monsters.PNG",
+      monster: "https://yanisse-saddek.fr/monsters-invaders/img/monsters.png",
       tireur: "https://yanisse-saddek.fr/monsters-invaders/img/personnage.png",
       balle: "https://yanisse-saddek.fr/monsters-invaders/img/bullet.png",
       vie: 3,
