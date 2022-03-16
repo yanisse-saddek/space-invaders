@@ -8,7 +8,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       actif:"menu",
-      audio: new Audio('/audio/music.MP3'),
+      audio: new Audio('https://yanisse-saddek.fr/monsters-invaders/audio/music.mp3'),
       audioActif:true
     }
   }
