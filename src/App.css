@@ -100,8 +100,14 @@
 	  border-radius: 7px;
     box-shadow: 0 .2em gray; 
     cursor: pointer;
-
 }
+
+.start-btn:hover{
+  color: black;
+  background: white;
+  text-shadow: white 2px 2px 0px, red 4px 4px 0px;
+}
+
 .video-game-button:active, .start-btn:active {
 	box-shadow: none;
 	position: relative;
