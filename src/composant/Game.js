@@ -124,6 +124,9 @@ export default class Game extends React.Component {
             vie: this.state.vie -1,
             grid:newGrid
           })
+          let audio = new Audio('/audio/oof.mp3')
+          audio.play()
+
           this.getLife()
 
         }else{
@@ -146,7 +149,7 @@ export default class Game extends React.Component {
         if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster || this.state.grid[this.state.y][x] == this.state.balle) {
           deplacementGrid[this.state.y+1][x] = " "
           deplacementGrid[this.state.y][x] = " "
-          let audio = new Audio('/explosion.mp3')
+          let audio = new Audio('/audio/explosion.mp3')
           audio.play()
           this.setState({
             score:this.state.score+1
@@ -208,9 +211,7 @@ export default class Game extends React.Component {
           <div>
             <p>Score: {this.state.score}</p>            
           </div>
-          <div>
-            <p>meilleure score : {localStorage.getItem('score')}</p>
-          </div>
+          {localStorage.getItem('score')?<div><p class="score-txt">Meilleur Score: {localStorage.getItem('score')}</p></div>:null}
           <div>
             {this.state.lifes}
           </div>
