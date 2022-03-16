@@ -6,7 +6,7 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tireurCases: ["/img/personnage.PNG", "", "", "", " ", "", ""],
+      tireurCases: ["https://yanisse-saddek.fr/monsters-invaders/img/personnage.png", "", "", "", " ", "", ""],
       position: 0,
       grid: [
         [" ", " ", " ", " ", " ", " ", " "],
@@ -27,10 +27,10 @@ export default class Game extends React.Component {
       position: 0,
       active: true,
       score: 0,
-      explosion: "./img/monsters-dead.png",
+      // explosion: "yanisse/img/monsters-dead.png",
       monster: "/img/monsters.PNG",
-      tireur: "/img/personnage.PNG",
-      balle: "/img/bullet.png",
+      tireur: "https://yanisse-saddek.fr/monsters-invaders/img/personnage.png",
+      balle: "https://yanisse-saddek.fr/monsters-invaders/img/bullet.png",
       vie: 3,
       lifes:null
     }
@@ -44,7 +44,7 @@ export default class Game extends React.Component {
     var heartList = []
 
     for(var i=this.state.vie; i!==0; i--){
-      heartList.push(<img src="/img/heart.pnG" height="30"/>)
+      heartList.push(<img src="https://yanisse-saddek.fr/monsters-invaders/img/heart.png" height="30"/>)
     }
     this.setState({
       lifes:heartList
@@ -124,7 +124,7 @@ export default class Game extends React.Component {
             vie: this.state.vie -1,
             grid:newGrid
           })
-          let audio = new Audio('/audio/oof.mp3')
+          let audio = new Audio('https://yanisse-saddek.fr/monsters-invaders/audio/oof.mp3')
           audio.play()
 
           this.getLife()
@@ -149,7 +149,7 @@ export default class Game extends React.Component {
         if (this.state.grid[this.state.y + 1][x] == this.state.balle && this.state.grid[this.state.y][x] == this.state.monster || this.state.grid[this.state.y][x] == this.state.balle) {
           deplacementGrid[this.state.y+1][x] = " "
           deplacementGrid[this.state.y][x] = " "
-          let audio = new Audio('/audio/explosion.mp3')
+          let audio = new Audio('https://yanisse-saddek.fr/monsters-invaders/audio/explosion.mp3')
           audio.play()
           this.setState({
             score:this.state.score+1

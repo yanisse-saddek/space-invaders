@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react'
 import Game from './composant/Game'
 import Menu from './composant/Menu'
-import { toBeRequired } from '@testing-library/jest-dom/dist/matchers';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
