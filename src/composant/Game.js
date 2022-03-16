@@ -31,11 +31,24 @@ export default class Game extends React.Component {
       monster: "/img/monsters.PNG",
       tireur: "/img/personnage.PNG",
       balle: "/img/bullet.png",
+      vie: 3,
+      lifes:null
     }
   }
   componentDidMount = () => {
     var newGrid = this.state.grid
+    this.getLife()
     this.editGrid(newGrid)
+  }
+  getLife = ()=>{
+    var heartList = []
+
+    for(var i=this.state.vie; i!==0; i--){
+      heartList.push(<img src="/img/heart.pnG" height="30"/>)
+    }
+    this.setState({
+      lifes:heartList
+    })
   }
   editGrid = (newGrid) => {
     this.setState({
@@ -51,7 +64,7 @@ export default class Game extends React.Component {
       if (this.state.active) {
         this.deplacement()
       }
-    }, 700)
+    }, 300)
   }
   newMonster = () => {
     var gridMonster = this.state.grid
@@ -83,13 +96,36 @@ export default class Game extends React.Component {
 
     if(this.state.y>this.state.grid.length-2 && this.state.active){
       for(var checkX=0; checkX<=this.state.grid.length-1; checkX++){
-        var lastGrid = this.state.grid.slice(-1)
-        if(lastGrid[checkX].includes(this.state.monster)){
-          console.log('game over cousin ta perdu')
+        if (this.state.vie == 0 ){
           this.setState({
             active:false
           })
           localStorage.setItem('score', this.state.score)
+          this.props.stop()
+        }
+        var lastGrid = this.state.grid.slice(-1)
+        
+        if(lastGrid[checkX].includes(this.state.monster)){
+          var newGrid = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+          ]
+          this.setState({
+            vie: this.state.vie -1,
+            grid:newGrid
+          })
+          this.getLife()
+
         }else{
           this.setState({
             y:0
@@ -165,13 +201,13 @@ export default class Game extends React.Component {
       }
     }
   }
-
   render() {
     return (
       <div className="App">
         <div className="flex">
           <p className="score">Score: {this.state.score}</p>
           <p className="score">meilleure score : {localStorage.getItem('score')}</p>
+          {this.state.lifes}
         </div>
         <div tabIndex="0" onKeyDown={this.key} class="tableau">
           {
