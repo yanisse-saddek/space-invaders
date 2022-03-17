@@ -100,7 +100,8 @@ export default class Game extends React.Component {
           this.setState({
             active:false
           })
-          if(localStorage.getItem('score')>this.state.score){
+          var localScore= localStorage.getItem('score')
+          if( this.state.score > localScore ){
             localStorage.setItem('score', this.state.score)
           }
           this.props.stop()
