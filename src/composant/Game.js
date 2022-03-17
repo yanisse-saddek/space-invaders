@@ -100,7 +100,9 @@ export default class Game extends React.Component {
           this.setState({
             active:false
           })
-          localStorage.setItem('score', this.state.score)
+          if(localStorage.getItem('score')>this.state.score){
+            localStorage.setItem('score', this.state.score)
+          }
           this.props.stop()
         }
         var lastGrid = this.state.grid.slice(-1)
