@@ -39,6 +39,7 @@ export default class Game extends React.Component {
     var newGrid = this.state.grid
     this.getLife()
     this.editGrid(newGrid)
+    document.getElementById('tableau').focus();
   }
   getLife = ()=>{
     var heartList = []
@@ -219,7 +220,7 @@ export default class Game extends React.Component {
             {this.state.lifes}
           </div>
         </div>
-        <div tabIndex="0" onKeyDown={this.key} class="tableau">
+        <div tabIndex="0" onKeyDown={this.key} id="tableau" class="tableau">
           {
             this.state.grid.map(y => {
               var toReturn = []
